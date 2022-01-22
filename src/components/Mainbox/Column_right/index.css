@@ -1,0 +1,30 @@
+.panel-right {
+    position: relative;
+    height: 12rem;
+    border: 1px solid rgba(25, 186, 139, 0.2);
+    background: url(../../../../public/images/line\(1\).png) rgba(255, 255, 255, 0.05);
+    padding: 0 0.1875rem 0.5rem;
+    margin-bottom: 0.1875rem;
+}
+
+.panel-right::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    border-top: 3px solid skyblue;
+    border-left: 3px solid skyblue;
+    content: '';
+}
+
+.panel-right::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    border-top: 3px solid skyblue;
+    border-right: 3px solid skyblue;
+    content: '';
+}

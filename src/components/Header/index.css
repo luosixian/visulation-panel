@@ -1,0 +1,13 @@
+header {
+    position: relative;
+    height: 1.25rem;
+    background: url(../../../public/images/head_bg.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+h1 {
+    font-size: .475rem;
+    color: #fff;
+    text-align: center;
+    line-height: 1rem;
+}

@@ -1,0 +1,92 @@
+.mainbox {
+    display  : flex;
+    min-width: 1024px;
+    max-width: 1920px;
+    margin   : 0 auto;
+    height   : 300px;
+    padding  : .125rem .125rem 0;
+
+    .column {
+        flex: 3;
+
+        &:nth-child(2) {
+            flex: 5;
+        }
+    }
+
+    .panel {
+        position     : relative;
+        height       : 3.875rem;
+        border       : 1px solid rgba(25, 186, 139, .2);
+        background   : url(../images/line\(1\).png) rgba(255, 255, 255, .05);
+        padding      : 0 .1875rem .5rem;
+        margin-bottom: .1875rem;
+
+        &::before {
+            position   : absolute;
+            top        : 0;
+            left       : 0;
+            width      : 10px;
+            height     : 10px;
+            border-top : 3px solid skyblue;
+            border-left: 3px solid skyblue;
+            content    : '';
+        }
+
+        &::after {
+            position    : absolute;
+            top         : 0;
+            right       : 0;
+            width       : 10px;
+            height      : 10px;
+            border-top  : 3px solid skyblue;
+            border-right: 3px solid skyblue;
+            content     : '';
+        }
+    }
+
+    h2 {
+        height     : .6rem;
+        color      : #fff;
+        line-height: .6rem;
+        text-align : center;
+        font-size  : .25rem;
+    }
+
+    .chart {
+        height: 3rem;
+    }
+
+    .bigChart {
+        height: 11rem;
+    }
+
+    .panel-footer {
+        position: absolute;
+        bottom  : 0;
+        left    : 0;
+        width   : 100%;
+
+        &::before {
+            position     : absolute;
+            bottom       : 0;
+            left         : 0;
+            width        : 10px;
+            height       : 10px;
+            border-bottom: 3px solid skyblue;
+            border-left  : 3px solid skyblue;
+            content      : '';
+        }
+
+        &::after {
+            position     : absolute;
+            bottom       : 0;
+            right        : 0;
+            width        : 10px;
+            height       : 10px;
+            border-bottom: 3px solid skyblue;
+            border-right : 3px solid skyblue;
+            content      : '';
+        }
+    }
+}
