@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { DatePicker } from 'antd'
+import 'antd/dist/antd.css'
 import axios from 'axios'
-import * as echarts from 'echarts';
+import * as echarts from 'echarts'
 
 export default class Nightingale extends Component {
 
@@ -8,31 +10,45 @@ export default class Nightingale extends Component {
         this.requestData()
     }
 
-    requestData = () => {
+    onChange = (_, dateString) => {
+        //console.log(dateString);
+        const time = dateString.slice(0, 4) + dateString.slice(5, 7) + dateString.slice(8, 10)
+        this.requestData(time)
+    }
+
+    requestData = (date) => {
         axios.defaults.baseURL = 'http://127.0.0.1:5000'
         axios.get('/japan-corona-data-date', {
             params: {
-                date: 20220115,
+                date: date ? date : 20220120,
             },
         }).then(
             response => {
-                console.log(response.data.itemList);
+                const orderArr = response.data.itemList.sort((a, b) => b.npatients - a.npatients)
+                const data = [];
+                for (let i = 0; i < 15; i++) {
+                    data.push({ value: orderArr[i].npatients, name: orderArr[i].name_jp })
+                }
+                this.setState({ data })
                 this.initCharts()
             },
             error => {
                 console.log('Error', error)
             }
         )
-        this.initCharts()
     }
 
     initCharts = () => {
+        const { data } = this.state
         const myChart = echarts.init(document.getElementById('NightingaleChart'))
         const option = {
+            tooltip: {
+                trigger: 'item'
+            },
             legend: {
-                top: '20',
-                itemWidth: 10,
-                itemHeight: 10,
+                bottom: '5%',
+                itemWidth: 30,
+                itemHeight: 30,
                 textStyle: {
                     color: 'rgba(255,255,255,.5)',
                     fontSize: '12'
@@ -40,31 +56,32 @@ export default class Nightingale extends Component {
             },
             series: [
                 {
-                    name: 'Nightingale Chart',
+                    //name: 'Nightingale Chart',
+                    clockwise: false,
                     type: 'pie',
-                    radius: [10, 70],
-                    center: ['50%', '50%'],
+                    radius: ['40%', '180%'],
+                    center: ['57%', '57%'],
                     roseType: 'area',
                     label: {
-                        fontSize: 20,
+                        show: false,
+                        fontSize: 10,
+                        position: 'center'
                     },
-                    labelLine: {
-                        length: 6,
-                        length2: 8,
+                    emphasis: {
+                        label: {
+                            show: true,
+                            fontSize: '40',
+                            fontWeight: 'bold'
+                        }
                     },
+                    /* labelLine: {
+                        length: 1,
+                        length2: 2,
+                    }, */
                     itemStyle: {
-                        borderRadius: 8
+                        borderRadius: 3
                     },
-                    data: [
-                        { value: 400, name: 'rose 1' },
-                        { value: 38, name: 'rose 2' },
-                        { value: 32, name: 'rose 3' },
-                        { value: 30, name: 'rose 4' },
-                        { value: 28, name: 'rose 5' },
-                        { value: 26, name: 'rose 6' },
-                        { value: 22, name: 'rose 7' },
-                        { value: 18, name: 'rose 8' }
-                    ]
+                    data: data
                 }
             ]
         };
@@ -77,7 +94,9 @@ export default class Nightingale extends Component {
     render() {
         return (
             <div>
-                <h2>福岡県の感染状況</h2>
+                <h2>
+                    累積の陽性者数&nbsp;&nbsp;&nbsp;<DatePicker onChange={this.onChange} />
+                </h2>
                 <div className='bigChart' id='NightingaleChart'></div>
             </div>
         );;
