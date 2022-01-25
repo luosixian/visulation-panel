@@ -10,7 +10,8 @@
         flex: 3;
 
         &:nth-child(2) {
-            flex: 5;
+            flex  : 5;
+            margin: 0 .125rem .1875rem;
         }
     }
 
@@ -62,10 +63,12 @@
     }
 
     .panel-footer {
-        position: absolute;
-        bottom  : 0;
-        left    : 0;
-        width   : 100%;
+        position        : absolute;
+        bottom          : 0;
+        left            : 0;
+        width           : 100%;
+        background-color: transparent !important;
+        border-top      : none !important;
 
         &::before {
             position     : absolute;
@@ -88,5 +91,65 @@
             border-right : 3px solid skyblue;
             content      : '';
         }
+    }
+
+    .Navi {
+        margin-top      : 0;
+        background-color: rgba(101, 132, 226, 0.1);
+        padding         : .1875rem;
+
+        .Navi-button {
+            position: relative;
+            border  : 1px solid rgba(25, 186, 139, 0.17);
+
+            &::before {
+                position   : absolute;
+                left       : 0;
+                top        : 0;
+                content    : "";
+                width      : 30px;
+                height     : 10px;
+                border-top : 2px solid #02a6b5;
+                border-left: 2px solid #02a6b5;
+            }
+
+            &::after {
+                position     : absolute;
+                right        : 0;
+                bottom       : 0;
+                content      : "";
+                width        : 30px;
+                height       : 10px;
+                border-right : 2px solid #02a6b5;
+                border-bottom: 2px solid #02a6b5;
+            }
+
+            ul {
+                display: flex;
+
+                li {
+                    position   : relative;
+                    flex       : 1;
+                    line-height: 1rem;
+                    font-size  : .875rem;
+                    color      : #ffeb7b;
+                    text-align : center;
+
+                    &:nth-child(1)::after {
+                        content   : "";
+                        position  : absolute;
+                        top       : 25%;
+                        right     : 0;
+                        height    : 50%;
+                        width     : 1px;
+                        background: rgba(255, 255, 255, 0.2);
+                    }
+                }
+            }
+        }
+    }
+
+    .midChart {
+        height          : 9.5625rem;
     }
 }
