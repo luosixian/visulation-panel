@@ -2,20 +2,17 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import * as echarts from 'echarts'
 
-export default class Population extends Component {
+export default class PopulationPreDay extends Component {
 
     componentDidMount() {
         this.requestData()
     }
 
     requestData = () => {
-        axios.get('data/reduction_rate.json', {
-            params: {
-
-            },
+        axios.get('http://localhost:3000/data/reduction_rate.json', {
         }).then(
             response => {
-                const dataOrder = response.data.sort((a, b) => Math.abs(b.comparisonPreSpread) - Math.abs(a.comparisonPreSpread))
+                const dataOrder = response.data.sort((a, b) => Math.abs(b.comparisonPreDay) - Math.abs(a.comparisonPreDay))
                 const dataSiteName = [];
                 const dataPercent = [];
                 const data100 = [];
@@ -25,11 +22,11 @@ export default class Population extends Component {
                     const str = dataOrder[i].dataName.replace('<br>', '-')
                     dataSiteName.push(str)
 
-                    //handle comparisonPreSpread
-                    const num = Math.abs(parseFloat(dataOrder[i].comparisonPreSpread))
+                    //handle comparisonPreDay
+                    const num = Math.abs(parseFloat(dataOrder[i].comparisonPreDay))
                     dataPercent.push(num)
 
-                    data100.push(50)
+                    data100.push(200)
                 }
                 this.setState({ dataSiteName, dataPercent, data100 })
                 this.initCharts()
@@ -100,7 +97,7 @@ export default class Population extends Component {
                     yAxisIndex: 0,
                     // 修改第一组柱子的圆角
                     itemStyle: {
-                        barBorderRadius: 20,
+                        borderRadius: 20,
                         // 此时的color 可以修改柱子的颜色
                         color: (params) => myColor[params.dataIndex % myColor.length],
                     },
@@ -127,7 +124,7 @@ export default class Population extends Component {
                         color: "none",
                         borderColor: "#00c1de",
                         borderWidth: 3,
-                        barBorderRadius: 15
+                        borderRadius: 15
                     }
                 }
             ]

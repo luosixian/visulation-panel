@@ -7,7 +7,7 @@ import * as echarts from 'echarts'
 export default class Nightingale extends Component {
 
     componentDidMount() {
-        //this.requestData()
+        this.requestData()
     }
 
     onChange = (_, dateString) => {

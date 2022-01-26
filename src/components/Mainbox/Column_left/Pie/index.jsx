@@ -7,7 +7,7 @@ export default class Pie extends Component {
     state = {}
 
     componentDidMount() {
-        //this.requestData()
+        this.requestData()
     }
 
     requestData = () => {

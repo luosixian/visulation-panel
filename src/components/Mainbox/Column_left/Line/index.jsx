@@ -10,7 +10,7 @@ export default class Line extends Component {
     }
 
     componentDidMount() {
-        //this.requestData()
+        this.requestData()
     }
 
     requestData = () => {
